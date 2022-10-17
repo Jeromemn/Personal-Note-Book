@@ -4,7 +4,7 @@ const uuid = require("../../helpers/uuid");
 
 // GET Route for notes
 router.get("/", (req, res) => {
-  console.info(`${req.method} request revived for notes`);
+  console.info(`${req.method} request recieved for notes`);
   readFromFile("./db/db.json").then((data) => res.json(JSON.parse(data)));
 });
 
@@ -18,7 +18,7 @@ router.post("/", (req, res) => {
     const newNote = {
       title,
       text,
-      note_id: uuid(),
+      id: uuid(),
     };
 
     readAndAppend(newNote, "./db/db.json");
@@ -32,8 +32,8 @@ router.post("/", (req, res) => {
 
 // })
 
-// router.delete('/', (req, res) {
-
-// })
+router.delete('/db/db.json/:id', (req, res) => {
+  res.send('Delete note requuested')
+})
 
 module.exports = router;
