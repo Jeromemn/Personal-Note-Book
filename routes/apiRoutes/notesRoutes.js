@@ -1,7 +1,8 @@
 const router = require("express").Router();
-const { readFromFile, readAndAppend } = require("../../helpers/fsUtils");
+const { readFromFile,  writeToFile, readAndAppend } = require("../../helpers/fsUtils");
 const uuid = require("../../helpers/uuid");
-
+let notes = require('../../db/db.json');
+const fs = require('fs');
 // GET Route for notes
 router.get("/", (req, res) => {
   console.info(`${req.method} request recieved for notes`);
@@ -28,12 +29,34 @@ router.post("/", (req, res) => {
   }
 });
 
-// router.put('/', (req, res) => {
 
-// })
 
-router.delete('/db/db.json/:id', (req, res) => {
-  res.send('Delete note requuested')
+router.delete("/:id", (req, res) => {
+  const id = req.params.id
+
+  if (id) {
+    notes = notes.filter((note) => note.id !== id)
+
+    fs.writeFile(`./db/db.json`, JSON.stringify(notes, null, 4), (err) =>
+      err
+        ? console.error(err)
+        : console.log(`Note with id ${id} has been deleted from JSON file`)
+    )
+
+    const response = {
+      status: "success",
+      id: id,
+    }
+
+    res.status(201).json(response)
+  } else {
+    res.status(500).json("Error deleting note")
+  }
 })
+
+// router.delete('/:id', (req, res) => {
+//   readFromFile('./db/db.json').then((data) => res. )
+  
+// });
 
 module.exports = router;
