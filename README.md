@@ -29,7 +29,7 @@ This application is used to take notes. A user should begin by selecting "Get St
 
 ![Current note](/assets/Currentnote.jpg)
 
-Personal note book.mp4
+https://user-images.githubusercontent.com/112592440/196334674-0b502c2d-8e1a-46b4-92bf-9dc1fee29d2a.mp4
 
 [Link to video](https://drive.google.com/file/d/1eDCx4BBFoh0Yh2e03G4K2_Z6Cv1-6Vwo/view)
 
