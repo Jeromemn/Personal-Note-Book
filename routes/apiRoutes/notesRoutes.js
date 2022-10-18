@@ -33,11 +33,11 @@ router.post("/", (req, res) => {
 
 router.delete("/:id", (req, res) => {
   const id = req.params.id
-
+  console.log('before; ', notes);
   if (id) {
     notes = notes.filter((note) => note.id !== id)
-
-    fs.writeFile(`./db/db.json`, JSON.stringify(notes, null, 4), (err) =>
+    console.log('after; ', notes)
+    fs.writeFileSync(`./db/db.json`, JSON.stringify(notes, null, 4), (err) =>
       err
         ? console.error(err)
         : console.log(`Note with id ${id} has been deleted from JSON file`)
