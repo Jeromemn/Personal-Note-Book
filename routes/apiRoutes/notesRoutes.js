@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { readFromFile,  writeToFile, readAndAppend } = require("../../helpers/fsUtils");
+const { readFromFile,  readAndAppend } = require("../../helpers/fsUtils");
 const uuid = require("../../helpers/uuid");
 let notes = require('../../db/db.json');
 const fs = require('fs');
@@ -35,9 +35,9 @@ router.delete("/:id", (req, res) => {
   const id = req.params.id
   console.log('before; ', notes);
   if (id) {
-    notes = notes.filter((note) => note.id !== id)
+    const remaining = notes.filter((note) => note.id !== id)
     console.log('after; ', notes)
-    fs.writeFileSync(`./db/db.json`, JSON.stringify(notes, null, 4), (err) =>
+    fs.writeFileSync(`./db/db.json`, JSON.stringify(remaining, null, 4), (err) =>
       err
         ? console.error(err)
         : console.log(`Note with id ${id} has been deleted from JSON file`)
