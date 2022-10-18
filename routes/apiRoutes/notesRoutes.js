@@ -1,7 +1,7 @@
 const router = require("express").Router();
-const { readFromFile,  readAndAppend } = require("../../helpers/fsUtils");
+const { readFromFile, readAndAppend } = require("../../helpers/fsUtils");
 const uuid = require("../../helpers/uuid");
-let notes = require('../../db/db.json');
+// let notes = require('../../db/db.json');
 const fs = require('fs');
 // GET Route for notes
 router.get("/", (req, res) => {
@@ -31,11 +31,13 @@ router.post("/", (req, res) => {
 
 
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", async (req, res) => {
   const id = req.params.id
-  console.log('before; ', notes);
+  
   if (id) {
-    const remaining = notes.filter((note) => note.id !== id)
+    const data = await readFromFile('./db/db.json');
+    const notes =JSON.parse(data);
+    const remaining = notes.filter((note) => note.id !== id);
     console.log('after; ', notes)
     fs.writeFileSync(`./db/db.json`, JSON.stringify(remaining, null, 4), (err) =>
       err
