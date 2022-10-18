@@ -30,7 +30,7 @@ router.post("/", (req, res) => {
 });
 
 
-
+//  delete note reads file before removing matching id
 router.delete("/:id", async (req, res) => {
   const id = req.params.id
   
