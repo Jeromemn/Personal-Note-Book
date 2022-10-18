@@ -54,9 +54,5 @@ router.delete("/:id", (req, res) => {
   }
 })
 
-// router.delete('/:id', (req, res) => {
-//   readFromFile('./db/db.json').then((data) => res. )
-  
-// });
 
 module.exports = router;

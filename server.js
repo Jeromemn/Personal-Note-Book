@@ -1,8 +1,7 @@
 const express = require("express");
 const routes = require("./routes");
 
-const PORT = 3001;
-
+const PORT = process.env.PORT || 3000;
 const app = express();
 
 // Middlewear for parsing json and URLencoded form data
